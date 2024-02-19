@@ -24,7 +24,7 @@ I tried to use Sites as a macroscopic view of big picture things. For my situati
 
 Tenants are more intrinsic to DCIM related functions. If I was renting out VPS resources I could use this more. Right now I could tag it with who the box works for (Plex for house, ESXI for me).
 
-![](https://phantasmagoria.tech/wp-content/uploads/2021/07/organization.png)
+![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/organization.png)
 
 This section is for storing information about “physical things” from servers/switches to physical racks. In a fresh netbox install this is the section you will live in for a while.
 
@@ -36,7 +36,7 @@ This section is for storing information about “physical things” from servers
 
 **Connections** are pretty granular for what I’ve been doing. You can add specific types of interfaces or cables here to be available when documenting things down the road.
 
-![](https://phantasmagoria.tech/wp-content/uploads/2021/07/devices.png)
+![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/devices.png)
 
 The IPAM section documents all layer 3 information.
 
@@ -50,21 +50,21 @@ IP Addresses are the individual host addresses you have entered.
 
 VLANs will list what VLAN’s you have and what devices they are on.
 
-![](https://phantasmagoria.tech/wp-content/uploads/2021/07/ipam.png)
+![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/ipam.png)
 
 Providers would be useful for documenting upstream’s with their ASN’s.
 
 Circuits would be where you can tag circuit ID’s on an interface.
 
-![](https://phantasmagoria.tech/wp-content/uploads/2021/07/circuits.png)
+![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/circuits.png)
 
 **Secrets** are text encrypted with RSA. The Enterprise use case for this is to tag each devices unique local login to the entry in Netbox. I use it as a pseudo password vault and have a device specifically made for storing all passwords on (not best practice).
 
-![](https://phantasmagoria.tech/wp-content/uploads/2021/07/Secrets.png)
+![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/Secrets.png)
 
 Change Log obviously tracks all changes, you can scroll down to the bottom here and see a complete list of all changes. You can use Ansible here to automatically write any update from the change log to a slack channel or something which would be invaluable if the database became inaccessible and you couldn’t view the change log normally. Changelog can or can not be migrated over with a SQL migration at the discretion of the maintainer.
 
-![](https://phantasmagoria.tech/wp-content/uploads/2021/07/changelog.png)
+![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/changelog.png)
 
 Add a Device
 ------------
@@ -73,43 +73,43 @@ While you can and should add the overall prefxies that you own (192.168.0.0/24) 
 
 Start by signing in via the login located in the upper right.
 
-![](https://phantasmagoria.tech/wp-content/uploads/2021/07/netbox-login.png)
+![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/netbox-login.png)
 
 You will need to add a Site before anything else. You can use the dropdown or  navigate to the Sites page from the Organization section on the homepage.
 
-![](https://phantasmagoria.tech/wp-content/uploads/2021/07/sites1.png)
+![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/sites1.png)
 
-![](https://phantasmagoria.tech/wp-content/uploads/2021/07/sites2.png)
+![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/sites2.png)
 
 Fields in Bold are required but anything else is optional. I would always recommend using a description whenever available. Click the blue create button at the very bottom of the page to continue (not pictured).
 
-![](https://phantasmagoria.tech/wp-content/uploads/2021/07/netbox-login-2.png)
+![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/netbox-login-2.png)
 
 You will automatically be in your new site. In Netbox there are many ways to do the same thing. For the next step I will recommend using the devices drop down and using the green add button next to manufacturers.
 
-![](https://phantasmagoria.tech/wp-content/uploads/2021/07/netbox-login-4.png)
+![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/netbox-login-4.png)
 
 You will need to list whatever device vendor you have in the name field and then hit the blue create button.
 
-![](https://phantasmagoria.tech/wp-content/uploads/2021/07/manufacturers.png)
+![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/manufacturers.png)
 
 I would now recommend using the Devices dropdown to add a device type under the previous vendor.
 
-![](https://phantasmagoria.tech/wp-content/uploads/2021/07/netbox-login-3.png)
+![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/netbox-login-3.png)
 
 Here you would specify if it was a Catalyst 1000 or in this case an IBM 5100 (not a Sun box, forgive the reference to early 2000’s conspiracies).
 
-![](https://phantasmagoria.tech/wp-content/uploads/2021/07/netbox-login-5.png)
+![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/netbox-login-5.png)
 
 Use the dropdown to create a device role that fits what can define your device. Core Router, Ring Switch, Datacenter, etc.
 
-![](https://phantasmagoria.tech/wp-content/uploads/2021/07/device-make.png)
+![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/device-make.png)
 
 You finally have all the required fields to populate/create a device. Use the devices dropdown and fill out all bolded fields.
 
 Some optional fields like Regions we did not create but you can easily add as needed.
 
-![](https://phantasmagoria.tech/wp-content/uploads/2021/07/netbox-login-6-1024x432.png)
+![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/netbox-login-6-1024x432.png)
 
 Adding an Interface and IP address
 ----------------------------------
@@ -118,15 +118,15 @@ By default if you created a device yourself (steps above) then there will be no 
 
 If you just created a device then you will be on your devices page already. You will want to use the add components drop down in the upper right and selecting interface.
 
-![](https://phantasmagoria.tech/wp-content/uploads/2021/07/components.png)
+![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/components.png)
 
 Fill out required fields here. The description field is not required but should be. You can mass add a ton of interfaces by doing something like \[fe\] – 0/0/1.1\[1-9\] which would add \[fe\] – 0/0/1.11 through \[fe\] – 0/0/1.19. I’m just adding one interface here FastEthernet – 0/0/1. As this is a copper connection I have to change the dropdown from the default type of virtual  and select a copper connection under the Ethernet category with the correct speed.
 
-![](https://phantasmagoria.tech/wp-content/uploads/2021/07/add-interface.png)
+![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/add-interface.png)
 
 You should have arrived back on the original device page after creating the interface. At the bottom of the page use the green add button to apply an ip address to the interface using cidr notation.
 
-![](https://phantasmagoria.tech/wp-content/uploads/2021/07/netbox-login-7-1024x89.png)
+![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/netbox-login-7-1024x89.png)
 
 JSON Constraints
 ----------------
@@ -137,23 +137,23 @@ As it stands now any user that is authorized to use an RSA key to decrypt someth
 
 To apply a JSON constraint you will have to go to the admin panel, then under the USERS group on the left there should be a permissions section.  You enable or disable permissions here in addition to creating new ones. You can click the green add button in the lower left or click the grey add permission button in the upper right. These can also be added when making a group in the section above this.
 
-![](https://phantasmagoria.tech/wp-content/uploads/2021/07/netbox-login-8.png)
+![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/netbox-login-8.png)
 
 I am only allowing view permissions but you could grant full access and a JSON constraint would still pear things out.
 
 Additional actions from what I’ve seen have to deal with things like NAPALM permissions.
 
-![](https://phantasmagoria.tech/wp-content/uploads/2021/07/json-permission.png)
+![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/json-permission.png)
 
 This is a two part process to filter out passwords that don’t belong to you. I am going to add the first rule for just accessing secrets. Without this step you will either not be able to go into the secret category from the main netbox page or you will get into secrets and not have anything filtered. Essentially Secret>Secret is your ability to click on the secrets page or use the secrets dropdown and access it that way.
 
 Most of the object types are actually database tables. You can access the netbox postgresql database and open one of these tables.
 
-![](https://phantasmagoria.tech/wp-content/uploads/2021/07/Object-types.png)
+![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/Object-types.png)
 
 You will have to apply the rules to somebody at this point. Your first option is to do it by group, the only group I have made so far is operations. If you don’t apply to a group you will have to apply to a user, in this case IPAM. IPAM is already in the operations group so
 
-![](https://phantasmagoria.tech/wp-content/uploads/2021/07/netbox-login-9.png)
+![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/netbox-login-9.png)
 
 A Constraint acts as a filter/lens to where you can only see things allowed by the constraint. You would typically do something like “in devices category only show user A machines that have a status of up and that are in this ip range” or whatever type of filtering you see fit. In a big organization this of course could be used to keep people in different regions from seeing/manipulating  things outside of their jurisdiction.
 
@@ -163,15 +163,15 @@ The syntax for Constraints is
 
 Here I’m using {“name : “ops pwd1”} which means that this account should only list something with ops pwd1 as the field name. This isnt quite the case which is why we need another rule to reinforce this.
 
-![](https://phantasmagoria.tech/wp-content/uploads/2021/07/netbox-login-10.png)
+![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/netbox-login-10.png)
 
 The Second rule should look the same except for the object type will change to secret role
 
-![](https://phantasmagoria.tech/wp-content/uploads/2021/07/netbox-login-11.png)
+![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/netbox-login-11.png)
 
 And the new constraint will be {“name”:”operations”}. Since IPAM has the secret role named “Operations” this should prevent this user from seeing any secret role that isnt tagged as operations. This is not the case by itself but with rule 1 in place as well it is effective.
 
-![](https://phantasmagoria.tech/wp-content/uploads/2021/07/netbox-login-12.png)
+![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/netbox-login-12.png)
 
 Setup via terminal - Linux
 --------------------------
