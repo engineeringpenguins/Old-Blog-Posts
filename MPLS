@@ -8,13 +8,13 @@ Multi Protocol Label Switching  is a fun network architecture to learn about, I 
 
 The MPLS Shim is located between the Layer 2 header and the layer 3 header. Routers only have to read a fraction of the data to get to the next hop. Every MPLS router has a “forwarding table” that is used to “push, pop, or swap” labels.
 
-/\*! elementor - v3.19.0 - 07-02-2024 \*/ .elementor-widget-image{text-align:center}.elementor-widget-image a{display:inline-block}.elementor-widget-image a img\[src$=".svg"\]{width:48px}.elementor-widget-image img{vertical-align:middle;display:inline-block} ![](https://phantasmagoria.tech/wp-content/uploads/2021/07/mpls.png)
+/\*! elementor - v3.19.0 - 07-02-2024 \*/ .elementor-widget-image{text-align:center}.elementor-widget-image a{display:inline-block}.elementor-widget-image a img\[src$=".svg"\]{width:48px}.elementor-widget-image img{vertical-align:middle;display:inline-block} ![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/MPLS/mpls.png)
 
 MPLS can work with layer 2 or layer 3 traffic, can be implemented on copper and fiber networks and is protocol independent  (Ethernet, ATM, Frame Relay, TCP/IP). When the Label Edge Router (LER) gets a ingress packet it will perform a routing lookup. Inside of the MPLS network the LER will create a “Label Switched Path” (LSP) to the destination “Label Switch Router” (LSR) or LER. 
 
 In this lab I have a MPLS network with two FRR Customer Edge Routers connected to Cisco CSR1000’s for the Label Edge Routers which then connect into the MikroTik LSR core.
 
-![](https://phantasmagoria.tech/wp-content/uploads/2021/07/pyramid-1024x441.png)
+![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/MPLS/pyramid-1024x441.png)
 
 Cisco (IOS XE) configuration:
 
@@ -117,35 +117,35 @@ Verify
 > /mpls ldp print
 
 
-![MikroTik - Verify Interfaces/Address](https://phantasmagoria.tech/wp-content/uploads/2021/07/minterfacec.png)
+![MikroTik - Verify Interfaces/Address](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/MPLS/minterfacec.png)
 
 MikroTik - Verify Interfaces/Address
 
-![Cisco - Verify Interface/Address](https://phantasmagoria.tech/wp-content/uploads/2021/07/show-ip-int-br.png)
+![Cisco - Verify Interface/Address](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/MPLS/show-ip-int-br.png)
 
 Cisco - Verify Interface/Address
 
-![Mikrotik - Verify OSPF](https://phantasmagoria.tech/wp-content/uploads/2021/07/mospf.png)
+![Mikrotik - Verify OSPF](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/MPLS/mospf.png)
 
 Mikrotik - Verify OSPF
 
-![Cisco - Verify OSPF](https://phantasmagoria.tech/wp-content/uploads/2021/07/iproute.png)
+![Cisco - Verify OSPF](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/MPLS/iproute.png)
 
 Cisco - Verify OSPF
 
-![Mikrotik - Verify MPLS](https://phantasmagoria.tech/wp-content/uploads/2021/07/ldp-print.png)
+![Mikrotik - Verify MPLS](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/MPLS/ldp-print.png)
 
 Mikrotik - Verify MPLS
 
-![Cisco - Verify MPLS](https://phantasmagoria.tech/wp-content/uploads/2021/07/forwarding-table.png)
+![Cisco - Verify MPLS](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/MPLS/forwarding-table.png)
 
 Cisco - Verify MPLS
 
-![Result: Customer edge](https://phantasmagoria.tech/wp-content/uploads/2021/07/certraceroute-1-1024x561.png)
+![Result: Customer edge](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/MPLS/certraceroute-1-1024x561.png)
 
 Result: Customer edge
 
-![Result: Provider edge](https://phantasmagoria.tech/wp-content/uploads/2021/07/certraceroute-1024x507.png)
+![Result: Provider edge](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/MPLS/certraceroute-1024x507.png)
 
 Result: Provider edge
 
@@ -158,7 +158,7 @@ If you want two remote sites to be on the same LAN you would use a layer 2 VPN. 
 
 In our original topology image we have two customer sites connected to an MPLS cloud. The CER’s and LER’s are connected via a layer 2 bridge that carries through the MPLS core. The LAN side of CER1 can utilize any local resources (including pulling an ip via DHCP) on the LAN side of  CER2.
 
-![](https://phantasmagoria.tech/wp-content/uploads/2021/07/mpls2.0-1024x475.png)
+![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/MPLS/mpls2.0-1024x475.png)
 
 I re organized my existing topology and added redundancy in the LSR core. Our LER’s now have CustB CER’s (Cisco) attached and are forming a L2 VPN.
 
