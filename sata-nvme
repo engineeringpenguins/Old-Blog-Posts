@@ -4,7 +4,7 @@ Bare Metal Server to ESXI
 How (not) to convert a server into a virtual image
 ==================================================
 
-![](https://phantasmagoria.tech/wp-content/uploads/2021/12/goal.png "goal")
+![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/sata-nvme/goal.png "goal")
 
 This post is not going to be documenting how you would accomplish this task correctly, instead this post will showcase all of the ways I failed to accomplish my task (until I succeeded).
 
@@ -14,11 +14,11 @@ This process would have been significantly easier if I had purchased a server mo
 
 \*Disclaimer: I built the PC my Girlfriend is using so that I could play VR and 4K games before she moved in with me. I am not a monster stealing her personal PC. The server/her current PC has a 4th gen Ryzen5, DDR4, and 5700XT so more than enough to play Stardew Valley 🙂
 
-![](https://phantasmagoria.tech/wp-content/uploads/2021/12/process-2.png "process")
+![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/sata-nvme/process-2.png "process")
 
 My high level goal was to turn my “new” server into a hypervisor to efficiently use the additional resources. My secondary goal was to convert my Server OS (currently living on the backup drive) into a virtual image that could live on the hypervisor to avoid taking up another bare metal machine.
 
-![](https://phantasmagoria.tech/wp-content/uploads/2021/12/goals.png "goals")
+![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/sata-nvme/goals.png "goals")
 
 My Primary goal was accomplished without any issues. I installed ESXI and created some VM’s and plan to add it to the cluster after completing my Secondary Goal.
 
@@ -26,7 +26,7 @@ My first thought to get a physical machine into a virtual enviornment is to crea
 
 After failing here I had a Eureka moment and realized I do not have to create an optical image, If I just want this in ESXI I can try and convert an OS into an ESXI readable virtual disk. After some Googling I found a really cool tool called vcenter converter ([link](https://customerconnect.vmware.com/downloads/info/slug/infrastructure_operations_management/vmware_vcenter_converter_standalone/6_2_0)). With this tool you can provide login credentials for any IP address and it will log in and start a live upload to whatever ESXI host you specify and also create the VM/RAM according to source.
 
-![](https://phantasmagoria.tech/wp-content/uploads/2021/12/vcenter-converter.png "vcenter converter")
+![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/sata-nvme/vcenter-converter.png "vcenter converter")
 
 This tool is fascinating, I would love to understand how it does what it does and perhaps I could make my own version. Unfortunately this product was EOL in 2017 and Ubuntu 16.x was the last version supported. I considered downgrading my OS from 20.04 but left that as a last resort. From the error provided above I infered that the Converter tool was using an outdated kernal and boot loader. I tried to boot into the VM as it was 97% and potentially viable. I hit the GNU/Grub recovery CLI which to me normally means hard failure and reflash. I tried to use an ubuntu 20.04 live CD to install grub2 instead of grub1 as well as any other boot specific functions. At this point I could hit a normal grub bootloader AND it could see my partitions/OS from earlier. I could not boot into the OS or any of the recovery modes though as it was saying there were very low level system things missing. At this point I had to move on from the migration tool, it is shocking they have not kept it in development as it seems to be invaluable.
 
@@ -40,7 +40,7 @@ sudo dd bs=1M count=300000 if=/dev/sda of=./ubtbak.img
 
 This time it would write the whole 2TB drive but stop  after 300GB (100 extra for safety against dataloss). I got the exact same error as before and the file stopped after ~4GB. This may be related to the recovery partition being in NTFS but that should not have caused an issue.
 
-![](https://phantasmagoria.tech/wp-content/uploads/2021/12/clonezilla.png "clonezilla")
+![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/sata-nvme/clonezilla.png "clonezilla")
 
 A linux SME that I know reccomended an opensource drive cloning tool called clonezilla ([link](https://clonezilla.org/)). I booted clonezilla as a liveCD and cloned partition’s 1 and 2 to my recovery partition on the other drive. I then copied the recovery file (which is actually a directory of database files) to my NAS to be accessed by the VM. I loaded clonezilla in a VM with a 500GB hard drive expecting to be able to restore the file but for some reason the clonezilla program itself was far more peared down in a VM than it is on bare metal. I could not recover from anything not locally attached. I do not have a 300GB+ USB that I could have used and to attach a drive via SATA to the ESXI host itself and then SSH into the host and add a mount point in the virtual hard drive to a partition of another drive without overwriting the data seemed excessive.
 
@@ -48,7 +48,7 @@ If not using in a VM I found the clonezilla clone/restore model to be excellent 
 
 Clonezilla has a tool to convert their backup images into a .ISO file (back to square one) so I tried using this. Immediately clonezilla needed me to download a dependency for xorriso (it should have this by default, no need to add complexity to this process). It began the process of converting and when I came back to check on status it said that it completed with no errors and has read every directory. The resulting file was 0 bytes however so this failed.
 
-![](https://phantasmagoria.tech/wp-content/uploads/2021/12/external-content.duckduckgo.com_.png "external-content.duckduckgo.com")
+![](https://github.com/engineeringpenguins/Old-Blog-Posts/tree/main/ImageReferences/sata-nvme/external-content.duckduckgo.com_.png "external-content.duckduckgo.com")
 
 I found a tool called Rescuezilla ([link](https://rescuezilla.com/)) that seems to use Clonezilla as a base but it also has what appears to be a Debian OS on top of it. If there was some kind of issue with how an antiquated tool like clonezilla does something I wanted to see if a new tool would be more up to date with technology. Initially I tried to load the clonezilla backup with rescuezilla in a VM like before but rescuezilla said there was an issue with the backup.
 
